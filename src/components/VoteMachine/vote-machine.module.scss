@@ -1,0 +1,36 @@
+.machine {
+  position: relative;
+  width: 50rem;
+  height: 25rem;
+
+  background: #e3e3e3;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 1rem;
+
+  .screen {
+    width: 28rem;
+    height: 17rem;
+    border: 2px solid #e0e0e0;
+  }
+  .display {
+    width: 18rem;
+    height: 20rem;
+  }
+
+
+  footer {
+    position: absolute;
+    width: 50rem;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    
+    div {
+      width: 6px;
+      height: 1rem;
+      background-color: #111;
+    }
+  }
+}

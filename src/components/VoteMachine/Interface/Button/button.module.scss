@@ -1,0 +1,48 @@
+.button {
+
+  background: #323232;
+
+  border: 4px solid #000d;
+  border-right: 4px solid #000b;
+  border-top: 4px solid #0002;
+  border-left: 4px solid #0005;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+
+  transition: border .08s;
+
+  &.text, &.stretch{
+    font-size: .7rem;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+  }
+  &.number {
+    font-size: 1.2rem;
+  }
+  &.stretch {
+    height: 3rem;
+    > big {
+      transform: scaleY(1.2);
+    }
+  }
+
+
+  &:active {
+    border: 4px solid #000d;
+    border-bottom: 4px solid #0002;
+    border-left: 4px solid #000b;
+    border-right: 4px solid #0005;
+  }
+
+  span {
+    font-size: 80%;
+    color: #0008;
+  }
+
+}

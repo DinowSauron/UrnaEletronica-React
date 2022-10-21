@@ -1,0 +1,20 @@
+.VoteTable {
+  
+  display: inline-block;
+  
+  .numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    div {
+      display: block;
+      width: .8rem;
+      height: 1.12rem;
+      font-weight: bold;
+      margin-right: 2px;
+      padding: 2px;
+      border: 1px dashed #5558;
+    }
+  }
+}
