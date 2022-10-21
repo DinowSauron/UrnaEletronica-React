@@ -2,6 +2,7 @@ import { HTMLAttributes } from "react";
 import { Numpad } from "./Numpad/Numpad";
 import styles from "./Interface.module.scss"
 import { Button } from "./Button/Button";
+import { useVoteContext } from "../../../contexts/VoteContext";
 
 
 interface DisplayProps extends HTMLAttributes<HTMLDivElement>{
@@ -9,12 +10,33 @@ interface DisplayProps extends HTMLAttributes<HTMLDivElement>{
 }
 export function Interface({className, ...props}: DisplayProps){
 
+  
+  const { 
+    setSelectedNumbers, 
+    selectedNumbers, 
+    maxCharacters,
+    status
+  } = useVoteContext();
+  const audio = new Audio("/plim.mp3");
+
+
+
+  
+  function handleNumpadKeyPress(key: number) {
+    audio.play();
+    console.log(selectedNumbers);
+
+    if(selectedNumbers.length >= maxCharacters || status === "Loading")
+      return;
+    setSelectedNumbers((selectedNumbers + key).toString());
+  }
+
+
   return (
     <aside 
       className={styles.display + ` ${className}`} 
       {...props}
     >
-
       <header>
         <img src="/brasaooficialcolorido.png" alt="brasão ministério da república federativa do Brasil" />
 
@@ -23,7 +45,8 @@ export function Interface({className, ...props}: DisplayProps){
 
       <div>
         
-        <Numpad />
+        <Numpad onKeyPress={handleNumpadKeyPress}/>
+
         <div className={styles.buttons}>
           <Button format="text" color="#fff">
             BRANCO <span>⠃⠗⠁⠝⠉⠕</span>
@@ -36,7 +59,6 @@ export function Interface({className, ...props}: DisplayProps){
           </Button>
         </div>
       </div>
-
     </aside>
   )
 }

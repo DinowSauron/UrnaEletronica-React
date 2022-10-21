@@ -15,7 +15,7 @@ export function WaitingVoter() {
       <p>Use o teclado numérico</p>
       <p>para se identificar</p>
 
-      <p className={styles.idInsert}>Seu ID: <VoteTable numbers={4}/></p>
+      <div className={styles.idInsert}>Seu ID: <VoteTable/></div>
 
       <footer>
         <hr />

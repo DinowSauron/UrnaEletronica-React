@@ -1,21 +1,23 @@
 
+import { useVoteContext } from "../../../../contexts/VoteContext";
 import styles from "./VoteTable.module.scss"
 
 
-interface VoteTableProps {
-  numbers: number;
-}
-export function VoteTable({numbers}: VoteTableProps) {
 
-  
+export function VoteTable() {
+
+  const { selectedNumbers, maxCharacters } = useVoteContext();
+  let index = -1;
 
   return (
     <div className={styles.VoteTable}>
       <div className={styles.numbers}>
-        <div>⠀</div>
-        <div>⠀</div>
-        <div>⠀</div>
-        <div>⠀</div>
+
+        {[...Array(maxCharacters)].map(() => {
+          index++;
+          return <div key={index}>{selectedNumbers[index] || "⠀"}</div>
+        })}
+
       </div>
     </div>
   )

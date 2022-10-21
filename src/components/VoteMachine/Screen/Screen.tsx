@@ -1,4 +1,5 @@
 import { HTMLAttributes, useEffect, useState } from "react"
+import { useVoteContext } from "../../../contexts/VoteContext";
 import { GetTodayDateFormated } from "../../../lib/GetTodayDateFormated";
 import { Loading } from "./Loading/Loading";
 import styles from "./screen.module.scss"
@@ -15,7 +16,7 @@ type StatusStates =
 
 export function Screen({className, ...props}: ScreenProps){
 
-  const [status, setStatus] = useState<StatusStates>("Loading");
+  const { status, setStatus } = useVoteContext();
 
 
   /** Mouse Flare Handle Effect */
