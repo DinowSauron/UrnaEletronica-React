@@ -1,6 +1,6 @@
 import { GetTodayDateFormated } from "../../../../../lib/GetTodayDateFormated"
 import { VoteTable } from "../../VoteTable/VoteTable";
-import styles from "./waitingVoter.module.scss";
+import styles from "./waiting-voter.module.scss";
 
 
 export function WaitingVoter() {

@@ -1,6 +1,6 @@
 import { useVoteContext } from "../../../../../contexts/VoteContext"
 import { GetTodayDateFormated } from "../../../../../lib/GetTodayDateFormated"
-import styles from "./voteViewer.module.scss"
+import styles from "./vote-viewer.module.scss"
 
 
 export function VoteViewer() {

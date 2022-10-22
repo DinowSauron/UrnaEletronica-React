@@ -1,6 +1,6 @@
 import { useVoteContext } from "../../../../../contexts/VoteContext"
 import { VoteTable } from "../../VoteTable/VoteTable"
-import styles from "./votingZone.module.scss"
+import styles from "./voting-zone.module.scss"
 
 
 export function VotingZone() {

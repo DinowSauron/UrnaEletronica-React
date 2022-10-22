@@ -1,6 +1,6 @@
 import { GetTodayDateFormated } from "../../../../../lib/GetTodayDateFormated"
 import { VoteTable } from "../../VoteTable/VoteTable"
-import styles from "./notElegible.module.scss"
+import styles from "./not-elegible.module.scss"
 
 
 export function NotElegible() {
