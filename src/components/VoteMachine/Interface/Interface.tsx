@@ -15,22 +15,49 @@ export function Interface({className, ...props}: DisplayProps){
     setSelectedNumbers, 
     selectedNumbers, 
     maxCharacters,
-    status
+    status,
+    nextState,
+    setStatus,
   } = useVoteContext();
   const audio = new Audio("/plim.mp3");
 
 
 
-  
+
   function handleNumpadKeyPress(key: number) {
     audio.play();
-    console.log(selectedNumbers);
+    // console.log("Preview Numbers: "+selectedNumbers);
 
-    if(selectedNumbers.length >= maxCharacters || status === "Loading")
+    if(selectedNumbers.length >= maxCharacters || status === "Loading" || status === "Finalized")
       return;
     setSelectedNumbers((selectedNumbers + key).toString());
   }
 
+  function handleCorrectKeyPress() {
+    audio.play();
+    setSelectedNumbers(selectedNumbers.slice(0,selectedNumbers.length - 1));
+  }
+
+  function handleWhiteKeyPress() {
+    audio.play();
+    ReturnIfNeeded();
+    nextState(true);
+  }
+
+  function handleConfirmKeyPress() {
+    audio.play();
+    ReturnIfNeeded();
+    if(status === "Loading" || selectedNumbers.length < maxCharacters) 
+      return;
+    nextState();
+  }
+
+  function ReturnIfNeeded(){
+    if(status === "VoteViewer") {
+      setStatus("WaitingVoter");
+      setSelectedNumbers("");
+    }
+  }
 
   return (
     <aside 
@@ -48,13 +75,29 @@ export function Interface({className, ...props}: DisplayProps){
         <Numpad onKeyPress={handleNumpadKeyPress}/>
 
         <div className={styles.buttons}>
-          <Button format="text" color="#fff">
+          <Button 
+            format="text" 
+            color="#fff" 
+            disabled={status === "WaitingVoter"}
+            onClick={() => handleWhiteKeyPress()}
+          >
             BRANCO <span>⠃⠗⠁⠝⠉⠕</span>
           </Button>
-          <Button format="text" color="#cc6f35">
+
+          <Button 
+            format="text" 
+            color="#cc6f35" 
+            onClick={() => handleCorrectKeyPress()}
+          >
             CORRIGE <span>⠉⠕⠗⠗⠊⠛⠑</span>
           </Button>
-          <Button format="stretch" color="#1a9d4a" style={{height: "2rem"}}>
+
+          <Button 
+            format="stretch" 
+            color="#1a9d4a" 
+            style={{height: "2rem"}}
+            onClick={() => handleConfirmKeyPress()}
+          >
             <big>CONFIRMA</big> <span>⠉⠕⠝⠋⠊⠗⠍⠁</span>
           </Button>
         </div>

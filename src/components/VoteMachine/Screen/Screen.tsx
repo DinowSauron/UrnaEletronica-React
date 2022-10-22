@@ -1,18 +1,20 @@
 import { HTMLAttributes, useEffect, useState } from "react"
 import { useVoteContext } from "../../../contexts/VoteContext";
-import { GetTodayDateFormated } from "../../../lib/GetTodayDateFormated";
-import { Loading } from "./Loading/Loading";
+import { Loading } from "./States/Loading/Loading";
 import styles from "./screen.module.scss"
-import { WaitingVoter } from "./WaitingVoter/Loading";
+import { WaitingVoter } from "./States/WaitingVoter/Loading";
+import { NotElegible } from "./States/NotElegible/NotElegible";
+import { VotingZone } from "./States/VotingZone/VotingZone";
+import { Finalized } from "./States/Finalized/Finalized";
+import { VoteViewer } from "./States/VoteViewer/VoteViewer";
+import { ErrorAlreadyVoted } from "./States/ErrorAlreadyVoted/ErrorAlreadyVoted";
+
 
 
 
 interface ScreenProps extends HTMLAttributes<HTMLDivElement>{
   className?: string;
 }
-type StatusStates = 
-  "Loading" | 
-  "WaitingVoter" | "";
 
 export function Screen({className, ...props}: ScreenProps){
 
@@ -24,14 +26,10 @@ export function Screen({className, ...props}: ScreenProps){
     const flare = document.getElementById("flare");
     flare!.style.setProperty("--mouseX", (event.pageX - 500) + "%");
   }
-
   useEffect(() => {
-    window.addEventListener('mousemove', handleWindowMouseMove);
+    // window.addEventListener('mousemove', handleWindowMouseMove); maybe you like it?
+  },[])
 
-    setInterval(() => {
-      setStatus("WaitingVoter")
-    }, 5000)
-  })
 
 
   return (
@@ -39,10 +37,16 @@ export function Screen({className, ...props}: ScreenProps){
       className={styles.screen + ` ${className}`} 
       {...props}
     >
-      <div id="flare" className={styles.flare}></div>
+      {/* <div id="flare" className={styles.flare}></div> */}
       {status === "Loading" && <Loading/>}
 
       {status === "WaitingVoter" && <WaitingVoter />}
+
+      {status === "NotElegible" && <NotElegible />}
+      {status === "VoteZone" && <VotingZone />}
+      {status === "Finalized" && <Finalized />}
+      {status === "VoteViewer" && <VoteViewer />}
+      {status === "AlreadyVoted" && <ErrorAlreadyVoted />}
     </main>
   )
 }

@@ -14,7 +14,7 @@ export function Numpad({onKeyPress, ...props}: NumpadProps){
     <div className={styles.numPad} {...props}>
 
       <div className={styles.line}>
-        <Button onClick={() => onKeyPress(1)}>1 <span>⠼⠁</span></Button>
+        <Button onClick={() => onKeyPress(1)}> 1 <span>⠼⠁</span></Button>
         <Button onClick={() => onKeyPress(2)}> 2 <span>⠼⠃</span></Button>
         <Button onClick={() => onKeyPress(3)}> 3 <span>⠼⠉</span></Button>
       </div>

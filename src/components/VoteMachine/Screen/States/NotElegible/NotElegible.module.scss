@@ -1,0 +1,59 @@
+
+.NotElegible {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  
+  display: flex;
+  flex-direction: column;
+
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 5rem;
+    
+    padding: 0.5rem;
+    font-size: .8rem;
+    h3 {
+      margin: 0;
+      opacity: .5;
+    }
+  }
+  p {
+    margin: 0;
+    text-align: center;
+  }
+  h2 {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  .idInsert {
+    text-align: left;
+    margin: 1rem;
+  }
+
+  footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    hr {
+      width: 100%;
+      border: 1px solid #000;
+    }
+    p {
+      text-align: left;
+      font-size: .7rem;
+      margin-left: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    h3 {
+      font-size: .8rem;
+      margin: 0;
+      margin-left: .8rem;
+      margin-bottom: 5px;
+    }
+  }
+}

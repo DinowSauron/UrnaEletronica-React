@@ -1,0 +1,34 @@
+
+.Finalized {
+  width: 100%;
+  height: 100%;
+
+  background-color: #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transition: 4s;
+
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.5rem;
+    width: 2rem;
+  }
+  h2 {
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 8rem;
+  }
+  p {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: .2rem;
+    opacity: .5;
+
+  }
+}
