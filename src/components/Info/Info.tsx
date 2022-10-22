@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useState } from "react";
 import { getVotersData } from "../../Data/Voters";
 import { getVotingCategoriesData } from "../../Data/VotingCategories";
-import styles from "./info.module.scss"
+import styles from "./info.module.scss";
 
 export function Info() {
   const [showInfo, setShowInfo] = useState(false);

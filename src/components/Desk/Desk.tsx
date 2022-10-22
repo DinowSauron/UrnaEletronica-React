@@ -1,4 +1,4 @@
-import styles from "./desk.module.scss"
+import styles from "./desk.module.scss";
 
 export function Desk() {
 
