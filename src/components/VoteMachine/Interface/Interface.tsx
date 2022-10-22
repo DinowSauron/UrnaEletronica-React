@@ -40,7 +40,11 @@ export function Interface({className, ...props}: DisplayProps){
 
   function handleWhiteKeyPress() {
     audio.play();
-    ReturnIfNeeded();
+    if(status === "VoteViewer") {
+      localStorage.clear();
+      setStatus("WaitingVoter");
+      setSelectedNumbers("");
+    }
     nextState(true);
   }
 
@@ -78,7 +82,7 @@ export function Interface({className, ...props}: DisplayProps){
           <Button 
             format="text" 
             color="#fff" 
-            disabled={status === "WaitingVoter"}
+            disabled={status === "WaitingVoter" || status === "NotElegible"}
             onClick={() => handleWhiteKeyPress()}
           >
             BRANCO <span>⠃⠗⠁⠝⠉⠕</span>

@@ -1,0 +1,66 @@
+
+.info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  button {
+    position: absolute;
+    background: transparent;
+    top: 0;
+    left: 0;
+    margin: 0.5rem;
+
+    border: none;
+    border-radius: 4rem;
+    transition: .2s;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: .6;
+    }
+
+    img {
+      width: 3rem;
+      filter: invert(1);
+    }
+  }
+
+  >div {
+    width: 40rem;
+    height: 80vh;
+    margin: auto;
+    padding: 1rem;
+
+    background: #eceeaa;
+    opacity: .95;
+    z-index: 150;
+
+    overflow-y: scroll;
+
+    hr {
+      border: 1px solid #0002;
+    }
+    h4 {
+      text-transform: capitalize;
+      margin-bottom: 0;
+    }
+    p {
+      font-size: 1rem;
+      margin: 0;
+      margin-left: 1rem;
+      font-family: monospace;
+    }
+  } 
+
+
+  footer {
+    margin-top: 3rem;
+  }
+}

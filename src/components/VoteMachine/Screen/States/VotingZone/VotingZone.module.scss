@@ -8,6 +8,18 @@
   flex-direction: column;
 
 
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5rem;
+    height: 7rem;
+    margin: .5rem;
+
+    object-fit: contain;
+
+    border: 1px dashed #0002;
+  }
   header {
     display: flex;
     align-items: center;

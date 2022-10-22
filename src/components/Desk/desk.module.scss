@@ -1,0 +1,16 @@
+
+.desk {
+
+  .top {
+    position: absolute;
+    width: 70vw;
+    height: 20vh;
+
+    top: 55vh;
+    left: 20vw;
+
+    transform: skewX(-60deg);
+    background: rgb(128, 79, 2);
+    z-index: 0;
+  }
+}

@@ -32,6 +32,11 @@ export function VotingZone() {
       <h2>Seu voto para:</h2>
       <h3>{votingIn}</h3>
       <div className={styles.idInsert}>{("Número:").padEnd(20, " ")} <VoteTable/></div>
+     
+      {actualCandidate && (
+        <img src={`/candidates/${actualCandidate.pictureUrl || "Question.png"}`} alt="Foto do candidato" />
+      )}
+     
       <p>Nome: {actualCandidate?.Nome}</p>
       <p>Partido: {actualCandidate?.Partido}</p>
       <footer>

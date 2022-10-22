@@ -1,5 +1,7 @@
 
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { getVotersData } from "../Data/Voters";
+import { getVotingCategoriesData } from "../Data/VotingCategories";
 import { FindArrById } from "../lib/FindArrById";
 
 export type StatusTypes = 
@@ -21,7 +23,6 @@ type VoteContextProviderData = {
   actualCandidate: votingSpecs | undefined;
   getVotersRegistred: () => votingSpecs[];
   setSelectedNumbers: (numbers: string) => void;
-  getVoteOptions: () => votingSpecs[] | undefined; // undefined = finalized
   setStatus: (stats: StatusTypes) => void;
   nextState: (isWhiteVote?: boolean) => void;
   getVotingCategories: () => {
@@ -38,6 +39,7 @@ export type votingSpecs = {
   Id: number;
   Nome: string;
   Partido?: string;
+  pictureUrl?: string;
 }
 
 
@@ -49,8 +51,13 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
   const [votingFor, setVotingFor] = useState(0);
   const [status, setStatus] = useState<StatusTypes>("Loading");
   const [actualCandidate, setActualCandidate] = useState<votingSpecs|undefined>(undefined);
-  const [votes, setVotes] = useState<number[]>([])
+  const [votes, setVotes] = useState<number[]>([]);
   const [currentVoter, setCurrentVoter] = useState<votingSpecs|undefined>(undefined);
+
+  
+  const voters = getVotersRegistred()
+  const votingCategorys = getVotingCategories();
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -61,11 +68,10 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
 
   /** shows in real time the current number candidate */
   useEffect(() => {
-    // console.log("votes: " + votes);
     if(status != "VoteZone")
       return;
 
-    const candidates = getVoteOptions();
+    const candidates = getCurrentCandidates();
     if(selectedNumbers.length >= maxCharacters && candidates) { // if all numbers is inserted
       const newCadidate = FindArrById(candidates,selectedNumbers)
       if(!newCadidate) {
@@ -82,41 +88,6 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
   },[selectedNumbers, status])
 
 
-  const voters = [
-    {Id: 1234, Nome: "Eleitor A"},
-    {Id: 5678, Nome: "Eleitor B"},
-    {Id: 9012, Nome: "Eleitor C"},
-    {Id: 9314, Nome: "Eleitor D"},
-    {Id: 1601, Nome: "Luiz Claudio"},
-    {Id: 5500, Nome: "Lucas"},
-  ]
-  const votingCategorys = {
-    lanches: {
-      digits: 2,
-      candidates: [
-        {Id: 11, Nome: "Hamburguer", Partido: "Breadzil"},
-        {Id: 22, Nome: "Pizza", Partido: "Brapzza"},
-        {Id: 33, Nome: "Pastel", Partido: "Massa"}
-      ]
-    },
-    bebidas: {
-      digits: 3,
-      candidates: [
-        {Id: 444, Nome: "Refrigerante", Partido: "RefriBra"},
-        {Id: 777, Nome: "Suco", Partido: "Frutas"},
-        {Id: 999, Nome: "Água", Partido: "Potável"}
-      ]
-    },
-    automôveis: {
-      digits: 6,
-      candidates: [
-        {Id: 555555, Nome: "Carro", Partido: "Poluidos"},
-        {Id: 888888, Nome: "Bicicleta", Partido: "Ambiente"},
-        {Id: 101010, Nome: "Avião", Partido: "Nuvens"}
-      ]
-    }
-  }
-
 
 
   /** when 'CONFIRMA/BRANCO' key is pressed */
@@ -125,31 +96,31 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
     if(status === "Loading")
       return
 
-
     if(status === "WaitingVoter" || status === "NotElegible"){
       if(selectedNumbers === "0000"){
         ChangeState("VoteViewer");
         return;
       }
 
-
-      const person = FindArrById(voters, Number(selectedNumbers));
-      setCurrentVoter(person);
+      const VoterPerson = FindArrById(voters, Number(selectedNumbers));
+      setCurrentVoter(VoterPerson);
       setVotingFor(0);
       setSelectedNumbers("");
 
-      if(person){
-        const allVotersInStorage = localStorage.getItem("Voters") || "[]";
-        const allVoters = JSON.parse(allVotersInStorage) as number[];
-        if(allVoters.includes(person.Id)){
+      if(VoterPerson){
+        const allVotersIdInStorage = localStorage.getItem("Voters") || "[]";
+        const allVotersId = JSON.parse(allVotersIdInStorage) as number[];
+        if(allVotersId.includes(VoterPerson.Id)){
           ChangeState("AlreadyVoted");
         }else {
           ChangeState("VoteZone");
         }
       }
-      else
+      else {
         ChangeState("NotElegible");
+      }
     }
+    
     if(status == "VoteZone") {
       const voteIn = isWhiteVote ? -1: actualCandidate!.Id
       setVotes(votes => [...votes, voteIn]);
@@ -159,9 +130,8 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
     }
   }
 
-
   /** Get vote options(candidates) and set maxChars  */
-  function getVoteOptions() {
+  function getCurrentCandidates() {
     const voteOptions = Object.entries(votingCategorys);
     if(votingFor > voteOptions.length - 1) { 
       // if don't have more options, end votation:
@@ -187,7 +157,7 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
     SaveVote({
       voter: currentVoter!,
       votes: votes
-    })
+    });
 
     setActualCandidate(undefined);
     setMaxCharacters(4);
@@ -195,19 +165,18 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
     setVotes([]);
     setVotingFor(0);
 
-
-
     setTimeout(() => {
       setStatus("WaitingVoter")
     }, 3000);
   }
-
   
   function getVotingCategories() {
-    return votingCategorys;
+    const data = getVotingCategoriesData();
+    return data;
   }
   function getVotersRegistred() {
-    return voters;
+    const data = getVotersData();
+    return data;
   }
 
   type VoteProps = {
@@ -215,7 +184,7 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
     votes: number[];
   }
   function SaveVote({votes, voter}: VoteProps){
-    console.log("Saved: " + votes + " " + voter.Nome)
+    // console.log("Saved: " + votes + " " + voter.Nome)
     const allVotersInStorage = localStorage.getItem("Voters") || "[]";
     const allVoters = JSON.parse(allVotersInStorage) as number[];
     localStorage.setItem("Voters", JSON.stringify([...allVoters, voter.Id]))
@@ -239,7 +208,6 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
     getVotingCategories,
     setSelectedNumbers,
     getVotersRegistred,
-    getVoteOptions,
     setStatus,
     nextState
   }}>
@@ -248,7 +216,7 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
 }
 
 
-
+/** Hook for use the Vote Context */
 export function useVoteContext() {
   const voteContext = useContext(VoteContext)
 

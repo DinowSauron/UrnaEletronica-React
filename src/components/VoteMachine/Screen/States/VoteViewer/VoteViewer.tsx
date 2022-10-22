@@ -25,7 +25,6 @@ export function VoteViewer() {
       </header>
 
       <section>
-
         <div>
           <h3>Apuração: </h3>
           <p>Porcentagem : {usersVotedPercent}%</p>
@@ -40,15 +39,15 @@ export function VoteViewer() {
           const brancos = localStorage.getItem(`${index}/-1`) || "0";
   
           return (
-          <div>
+          <div key={category[0]}>
             <h3>{category[0]}:</h3>
             {category[1].candidates.map(candidate => {
               const votes = localStorage.getItem(`${index}/${candidate.Id}`) || "0";
-              return ShowCandidateInformation(candidate.Nome,votes, votersQuantity);
+              return ShowCandidateInformation(candidate.Nome,votes, votersQuantity, candidate.Nome);
             })}
             <hr/>
-            <p>{ShowCandidateInformation("Nulos", nulos, votersQuantity)}</p>
-            <p>{ShowCandidateInformation("Brancos", brancos, votersQuantity)}</p>
+            {ShowCandidateInformation("Nulos", nulos, votersQuantity)}
+            {ShowCandidateInformation("Brancos", brancos, votersQuantity)}
           </div>
           )
         })}
@@ -57,17 +56,17 @@ export function VoteViewer() {
       <footer>
         <hr />
         <h3>Aperte a tecla:</h3>
-        <p>BRANCO ou CONFIRMA para sair da visualização</p>
+        <p>BRANCO para apagar a urna ou CONFIRMA para sair da visualização</p>
       </footer>
     </div>
   )
 }
 
-function ShowCandidateInformation(name: string,votes: string, votersQuantity: number) {
-  const percent = votersQuantity * Number(votes) + "%";
-  
 
-  return <p>
+function ShowCandidateInformation(name: string,votes: string, votersQuantity: number, key?: string) {
+  const percent = (100 / (votersQuantity || 1) * Number(votes)).toFixed(0) + "%";
+
+  return <p key={key}>
     {(name).padEnd(20,"_")}
     {(percent).padStart(4,"_")} - Votes: {votes} 
   </p>
