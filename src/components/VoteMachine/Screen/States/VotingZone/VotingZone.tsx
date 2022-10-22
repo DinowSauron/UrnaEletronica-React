@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
-import { useVoteContext, votingSpecs } from "../../../../../contexts/VoteContext"
-import { FindArrById } from "../../../../../lib/FindArrById";
-import { GetTodayDateFormated } from "../../../../../lib/GetTodayDateFormated"
+import { useVoteContext } from "../../../../../contexts/VoteContext"
 import { VoteTable } from "../../VoteTable/VoteTable"
-import styles from "./VotingZone.module.scss"
+import styles from "./votingZone.module.scss"
 
 
 export function VotingZone() {

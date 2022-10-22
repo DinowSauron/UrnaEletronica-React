@@ -2,7 +2,8 @@ import { HTMLAttributes, useEffect, useState } from "react"
 import { useVoteContext } from "../../../contexts/VoteContext";
 import { Loading } from "./States/Loading/Loading";
 import styles from "./screen.module.scss"
-import { WaitingVoter } from "./States/WaitingVoter/Loading";
+
+import { WaitingVoter } from "./States/WaitingVoter/WaitingVoter";
 import { NotElegible } from "./States/NotElegible/NotElegible";
 import { VotingZone } from "./States/VotingZone/VotingZone";
 import { Finalized } from "./States/Finalized/Finalized";

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import styles from "./Finalized.module.scss"
+import styles from "./finalized.module.scss"
 
 
 export function Finalized() {

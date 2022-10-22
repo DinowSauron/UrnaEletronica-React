@@ -1,5 +1,4 @@
 
-import { HTMLAttributes } from "react";
 import styles from "./numpad.module.scss"
 import { Button } from "../Button/Button"
 
