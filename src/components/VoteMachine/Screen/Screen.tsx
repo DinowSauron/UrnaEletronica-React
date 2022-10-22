@@ -1,14 +1,14 @@
-import { HTMLAttributes, useEffect, useState } from "react"
+import { HTMLAttributes, useEffect, useState } from "react";
 import { useVoteContext } from "../../../contexts/VoteContext";
-import { Loading } from "./States/Loading/Loading";
-import styles from "./screen.module.scss"
+import { Loading } from "./Loading/Loading";
+import styles from "./screen.module.scss";
 
-import { WaitingVoter } from "./States/WaitingVoter/WaitingVoter";
-import { NotElegible } from "./States/NotElegible/NotElegible";
-import { VotingZone } from "./States/VotingZone/VotingZone";
-import { Finalized } from "./States/Finalized/Finalized";
-import { VoteViewer } from "./States/VoteViewer/VoteViewer";
-import { ErrorAlreadyVoted } from "./States/ErrorAlreadyVoted/ErrorAlreadyVoted";
+import { WaitingVoter } from "./WaitingVoter/WaitingVoter";
+import { NotElegible } from "./NotElegible/NotElegible";
+import { VotingZone } from "./VotingZone/VotingZone";
+import { Finalized } from "./Finalized/Finalized";
+import { VoteViewer } from "./VoteViewer/VoteViewer";
+import { ErrorAlreadyVoted } from "./ErrorAlreadyVoted/ErrorAlreadyVoted";
 
 
 
@@ -29,7 +29,7 @@ export function Screen({className, ...props}: ScreenProps){
   }
   useEffect(() => {
     // window.addEventListener('mousemove', handleWindowMouseMove); maybe you like it?
-  },[])
+  },[]);
 
 
 
@@ -39,10 +39,9 @@ export function Screen({className, ...props}: ScreenProps){
       {...props}
     >
       {/* <div id="flare" className={styles.flare}></div> */}
+      
       {status === "Loading" && <Loading/>}
-
       {status === "WaitingVoter" && <WaitingVoter />}
-
       {status === "NotElegible" && <NotElegible />}
       {status === "VoteZone" && <VotingZone />}
       {status === "Finalized" && <Finalized />}

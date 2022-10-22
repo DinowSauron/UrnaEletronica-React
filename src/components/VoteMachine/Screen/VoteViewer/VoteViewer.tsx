@@ -1,6 +1,7 @@
-import { useVoteContext } from "../../../../../contexts/VoteContext"
-import { GetTodayDateFormated } from "../../../../../lib/GetTodayDateFormated"
-import styles from "./vote-viewer.module.scss"
+
+import { GetTodayDateFormated } from "../../../../lib/GetTodayDateFormated";
+import { useVoteContext } from "../../../../contexts/VoteContext";
+import styles from "./vote-viewer.module.scss";
 
 
 export function VoteViewer() {

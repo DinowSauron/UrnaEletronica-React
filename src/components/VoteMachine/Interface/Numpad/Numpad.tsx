@@ -1,13 +1,13 @@
 
-import styles from "./numpad.module.scss"
-import { Button } from "../Button/Button"
+import styles from "./numpad.module.scss";
+import { Button } from "../Button/Button";
 
 interface NumpadProps {
   onKeyPress: (agr0: number) => void;
 }
 
+
 export function Numpad({onKeyPress, ...props}: NumpadProps){
-  
 
   return (
     <div className={styles.numPad} {...props}>

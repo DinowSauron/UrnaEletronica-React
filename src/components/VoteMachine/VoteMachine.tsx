@@ -1,8 +1,8 @@
-import styles from "./vote-machine.module.scss"
-import { Screen } from "./Screen/Screen"
-import { Interface } from "./Interface/Interface"
-import { Spacers } from "../Spacers/Spacers"
-import { VoteContextProvider } from "../../contexts/VoteContext"
+import styles from "./vote-machine.module.scss";
+import { Screen } from "./Screen/Screen";
+import { Interface } from "./Interface/Interface";
+import { Spacers } from "../Spacers/Spacers";
+import { VoteContextProvider } from "../../contexts/VoteContext";
 
 export function VoteMachine(){
 

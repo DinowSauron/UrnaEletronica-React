@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 import { Numpad } from "./Numpad/Numpad";
-import styles from "./interface.module.scss"
+import styles from "./interface.module.scss";
 import { Button } from "./Button/Button";
 import { useVoteContext } from "../../../contexts/VoteContext";
 
