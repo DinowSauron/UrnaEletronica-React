@@ -19,7 +19,7 @@ export function Interface({className, ...props}: DisplayProps){
     nextState,
     setStatus,
   } = useVoteContext();
-  const audio = new Audio("/plim.mp3");
+  const audio = new Audio("./Plim.mp3");
 
 
 

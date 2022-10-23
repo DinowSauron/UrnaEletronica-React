@@ -8,7 +8,7 @@ export function ErrorAlreadyVoted() {
   const {setStatus} = useVoteContext()
 
   useEffect(() => {
-    const audio = new Audio("/plililim.mp3");
+    const audio = new Audio("./Plililim.mp3");
     audio.play();
 
     setTimeout(() => {

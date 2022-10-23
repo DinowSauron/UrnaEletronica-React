@@ -23,6 +23,7 @@ export function Info() {
           <hr />
 
           <h3>Eleitores Cadastrados:</h3>
+          <p>ID: 0000 - Apuração dos votos</p>
           {getVotersData().map(voter => (
             <p key={voter.Nome}>ID: {(voter.Id).toString().padStart(4,"0")} - Nome: {voter.Nome}</p>
           ))}

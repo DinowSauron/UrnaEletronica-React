@@ -4,6 +4,10 @@
 
 <img src="./public/foto1.png">
 
+Teste o projeto agora mesmo acessando o [Deploy](https://urna-eletronica-react.vercel.app/)
+
+
+
 ## Tecnologias Utilizadas:
 
 * Vite 

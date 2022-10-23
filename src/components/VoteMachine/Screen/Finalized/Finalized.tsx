@@ -4,7 +4,7 @@ import styles from "./finalized.module.scss";
 export function Finalized() {
 
   useEffect(() => {
-    const audio = new Audio("/plililim.mp3");
+    const audio = new Audio("./Plililim.mp3");
     audio.play();
   },[])
 
