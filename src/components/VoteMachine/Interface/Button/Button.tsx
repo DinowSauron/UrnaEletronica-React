@@ -8,15 +8,15 @@ interface DisplayButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
   color?: string;
 }
 
-export function Button({children,format,color, ...props}: DisplayButtonProps){
-  format = format || "number";
+export function Button({children,format = "number",color, ...props}: DisplayButtonProps){
+  
   return (
     <button 
       {...props}
-      className={
-        styles.button + " " + 
-        styles[format] + " "
-      } 
+      className={[
+        styles.button,
+        styles[format]
+      ].join(" ")}
       style={{backgroundColor: color, color: color? "#222": ""}}
     >
       {children}

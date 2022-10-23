@@ -1,5 +1,5 @@
 import { useVoteContext } from "../../../../contexts/VoteContext";
-import { VoteTable } from "../VoteTable/VoteTable";
+import { VoteTables } from "../VoteTables/VoteTables";
 import styles from "./voting-zone.module.scss";
 
 
@@ -9,12 +9,12 @@ export function VotingZone() {
     currentVoter, 
     actualCandidate,
     votingFor,
+    ChangeScreen, 
     getVotingCategories,
-    setStatus, 
   } = useVoteContext();
 
   if(!currentVoter){
-    setStatus("NotElegible");
+    ChangeScreen("NotElegible");
     return <></>;
   }
 
@@ -28,7 +28,7 @@ export function VotingZone() {
       </header>
       <h2>Seu voto para:</h2>
       <h3>{votingIn}</h3>
-      <div className={styles.idInsert}>{("Número:").padEnd(20, " ")} <VoteTable/></div>
+      <div className={styles.idInsert}>{("Número:").padEnd(20, " ")} <VoteTables/></div>
      
       {actualCandidate && (
         <img src={`/candidates/${actualCandidate.pictureUrl || "Question.png"}`} alt="Foto do candidato" />

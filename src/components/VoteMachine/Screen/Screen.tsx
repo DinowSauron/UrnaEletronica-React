@@ -1,4 +1,4 @@
-import { HTMLAttributes, useEffect, useState } from "react";
+import React, { HTMLAttributes } from "react";
 import { useVoteContext } from "../../../contexts/VoteContext";
 import { Loading } from "./Loading/Loading";
 import styles from "./screen.module.scss";
@@ -11,42 +11,46 @@ import { VoteViewer } from "./VoteViewer/VoteViewer";
 import { ErrorAlreadyVoted } from "./ErrorAlreadyVoted/ErrorAlreadyVoted";
 
 
-
-
 interface ScreenProps extends HTMLAttributes<HTMLDivElement>{
   className?: string;
 }
 
 export function Screen({className, ...props}: ScreenProps){
 
-  const { status, setStatus } = useVoteContext();
+  const { status } = useVoteContext();
 
-
-  /** Mouse Flare Handle Effect */
-  function handleWindowMouseMove(event: MouseEvent) {
-    const flare = document.getElementById("flare");
-    flare!.style.setProperty("--mouseX", (event.pageX - 500) + "%");
+  const screens = {
+    Loading: <Loading/>,
+    WaitingVoter: <WaitingVoter/>,
+    NotElegible: <NotElegible/>,
+    VoteZone: <VotingZone/>,
+    Finalized: <Finalized/>,
+    VoteViewer: <VoteViewer/>,
+    AlreadyVoted: <ErrorAlreadyVoted/>,
   }
-  useEffect(() => {
-    // window.addEventListener('mousemove', handleWindowMouseMove); maybe you like it?
-  },[]);
-
-
 
   return (
     <main 
-      className={styles.screen + ` ${className}`} 
+      className={[
+        styles.screen, 
+        className
+      ].join(" ")}
       {...props}
     >
-      {/* <div id="flare" className={styles.flare}></div> */}
-      
+      {Object.entries(screens).map(([key, Component]) => {
+        if(key === status)
+          return <React.Fragment key={key}>{Component}</React.Fragment>;
+      })}
+
+      {/* 
       {status === "Loading" && <Loading/>}
       {status === "WaitingVoter" && <WaitingVoter />}
       {status === "NotElegible" && <NotElegible />}
       {status === "VoteZone" && <VotingZone />}
       {status === "Finalized" && <Finalized />}
       {status === "VoteViewer" && <VoteViewer />}
-      {status === "AlreadyVoted" && <ErrorAlreadyVoted />}
+      {status === "AlreadyVoted" && <ErrorAlreadyVoted />} 
+      */}
     </main>
   )
 }

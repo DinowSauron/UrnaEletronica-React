@@ -1,0 +1,27 @@
+.credits {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+  // background-color: #fff2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  p {
+    margin: 0;
+  }
+  a {
+    color: #9aade4;
+
+    &:hover {
+      opacity: .72;
+    }
+  }
+}

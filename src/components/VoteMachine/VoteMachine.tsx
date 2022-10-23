@@ -11,7 +11,7 @@ export function VoteMachine(){
 
       <VoteContextProvider>
         <Screen className={styles.screen} />
-        <Interface className={styles.display} />
+        <Interface className={styles.interface} />
       </VoteContextProvider>
 
       <footer>

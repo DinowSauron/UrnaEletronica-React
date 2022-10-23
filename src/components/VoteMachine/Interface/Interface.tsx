@@ -12,16 +12,14 @@ export function Interface({className, ...props}: DisplayProps){
 
   
   const { 
-    setSelectedNumbers, 
+    status,
     selectedNumbers, 
     maxCharacters,
-    status,
-    nextState,
-    setStatus,
+    nextStep,
+    ChangeScreen,
+    setSelectedNumbers, 
   } = useVoteContext();
   const audio = new Audio("./Plim.mp3");
-
-
 
 
   function handleNumpadKeyPress(key: number) {
@@ -41,31 +39,37 @@ export function Interface({className, ...props}: DisplayProps){
   function handleWhiteKeyPress() {
     audio.play();
     if(status === "VoteViewer") {
+      // clear all data
       localStorage.clear();
-      setStatus("WaitingVoter");
+      ChangeScreen("VoteViewer");
       setSelectedNumbers("");
     }
-    nextState(true);
+    nextStep(true);
   }
 
   function handleConfirmKeyPress() {
     audio.play();
     ReturnIfNeeded();
     if(status === "Loading" || selectedNumbers.length < maxCharacters) 
-      return;
-    nextState();
+      return; // do nothing...
+    nextStep();
   }
 
+
+  /** Return to main State if need */
   function ReturnIfNeeded(){
     if(status === "VoteViewer") {
-      setStatus("WaitingVoter");
+      ChangeScreen("WaitingVoter");
       setSelectedNumbers("");
     }
   }
 
   return (
     <aside 
-      className={styles.display + ` ${className}`} 
+      className={[
+        styles.display,
+        className
+      ].join(" ")}
       {...props}
     >
       <header>
@@ -82,7 +86,7 @@ export function Interface({className, ...props}: DisplayProps){
           <Button 
             format="text" 
             color="#fff" 
-            disabled={status === "WaitingVoter" || status === "NotElegible"}
+            disabled={["WaitingVoter", "NotElegible", "Loading", "AlreadyVoted"].includes(status)}
             onClick={() => handleWhiteKeyPress()}
           >
             BRANCO <span>⠃⠗⠁⠝⠉⠕</span>

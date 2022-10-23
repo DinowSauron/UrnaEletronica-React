@@ -14,6 +14,7 @@ Teste o projeto agora mesmo acessando o [Deploy](https://urna-eletronica-react.v
 * ReactJS
 * Typescript
 * Sass
+* Context API
 * LocalStorage
 
 

@@ -16,17 +16,15 @@
     height: 17rem;
     border: 2px solid #e0e0e0;
   }
-  .display {
+  .interface {
     width: 18rem;
     height: 20rem;
   }
 
 
 
-  // Style...
-
-  &::after {
-    //top
+  // 3D Effect:
+  &::after { //top
     position: absolute;
     content: "";
     top: -4rem;
@@ -41,8 +39,8 @@
 
     background: #ffffff;
   }
-  &::before {
-    //right
+  &::before { //right
+
     position: absolute;
     content: "";
     top: 0;
@@ -56,6 +54,7 @@
     background-color: #c6c6c6;
   }
 
+  // Footer Design
   footer {
     position: absolute;
     width: 50rem;

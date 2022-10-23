@@ -1,5 +1,5 @@
 import { GetTodayDateFormated } from "../../../../lib/GetTodayDateFormated";
-import { VoteTable } from "../VoteTable/VoteTable";
+import { VoteTables } from "../VoteTables/VoteTables";
 import styles from "./waiting-voter.module.scss";
 
 
@@ -15,7 +15,7 @@ export function WaitingVoter() {
       <p>Use o teclado numérico</p>
       <p>para se identificar</p>
 
-      <div className={styles.idInsert}>Seu ID: <VoteTable/></div>
+      <div className={styles.idInsert}>Seu ID: <VoteTables/></div>
 
       <footer>
         <hr />

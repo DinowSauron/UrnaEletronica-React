@@ -1,15 +1,15 @@
 
 import { useVoteContext } from "../../../../contexts/VoteContext";
-import styles from "./vote-table.module.scss"
+import styles from "./vote-table.module.scss";
 
 
-export function VoteTable() {
+export function VoteTables() {
 
   const { selectedNumbers, maxCharacters } = useVoteContext();
   let index = -1;
 
   return (
-    <div className={styles.VoteTable}>
+    <div className={styles.VoteTables}>
       <div className={styles.numbers}>
 
         {[...Array(maxCharacters)].map(() => {

@@ -5,14 +5,14 @@ import styles from "./error-already-voted.module.scss";
 
 export function ErrorAlreadyVoted() {
 
-  const {setStatus} = useVoteContext()
+  const {ChangeScreen} = useVoteContext()
 
   useEffect(() => {
     const audio = new Audio("./Plililim.mp3");
     audio.play();
 
     setTimeout(() => {
-      setStatus("WaitingVoter");
+      ChangeScreen("WaitingVoter");
     }, 2000);
   }, [])
 

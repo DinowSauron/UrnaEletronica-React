@@ -1,5 +1,5 @@
 import { GetTodayDateFormated } from "../../../../lib/GetTodayDateFormated";
-import { VoteTable } from "../VoteTable/VoteTable";
+import { VoteTables } from "../VoteTables/VoteTables";
 import styles from "./not-elegible.module.scss";
 
 
@@ -15,7 +15,7 @@ export function NotElegible() {
       <p>Verifique seu ID</p>
       <p>Digite novamente</p>
 
-      <div className={styles.idInsert}>Seu ID: <VoteTable/></div>
+      <div className={styles.idInsert}>Seu ID: <VoteTables/></div>
 
       <footer>
         <hr />

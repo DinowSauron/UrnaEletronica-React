@@ -10,16 +10,19 @@
   justify-content: center;
   align-items: center;
   
-  button {
+  .infoIconButton {
     position: absolute;
     background: transparent;
     top: 0;
     left: 0;
     margin: 0.5rem;
+    padding: 0;
 
     border: none;
     border-radius: 4rem;
+    z-index: 200;
     transition: .2s;
+    overflow: hidden;
     cursor: pointer;
     
     &:hover {
@@ -31,6 +34,20 @@
       filter: invert(1);
     }
   }
+  .exitButtonInBackground {
+    position: absolute;
+    width: 100vw;
+    height: 100vw;
+    top: 0;
+    left: 0;
+    margin: 0;
+
+    font-size: 0;
+    background-color: #0000;
+    backdrop-filter: blur(1.5px);
+    z-index: 120;
+  }
+
 
   >div {
     width: 40rem;
@@ -39,9 +56,8 @@
     padding: 1rem;
 
     background: #eceeaa;
-    opacity: .95;
+    opacity: 0.95;
     z-index: 150;
-
     overflow-y: scroll;
 
     hr {
@@ -58,7 +74,6 @@
       font-family: monospace;
     }
   } 
-
 
   footer {
     margin-top: 3rem;
