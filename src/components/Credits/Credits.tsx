@@ -29,6 +29,14 @@ export function Credits(){
       >
         Linkedin
       </a>
+      <p>•</p>
+      <a 
+        href="https://github.com/DinowSauron/UrnaEletronica-React"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Código Fonte 
+      </a>
     </footer>
   )
 }
