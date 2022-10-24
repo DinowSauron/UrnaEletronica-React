@@ -75,10 +75,11 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
     if(selectedNumbers.length >= maxCharacters && candidates) { // if all numbers is inserted
       const newCadidate = FindArrById(candidates,selectedNumbers)
       if(!newCadidate) {
+        const isNull = !selectedNumbers.includes("•");
         setActualCandidate({ //if the number is incorrect shows 'Nulo'
-          Id: 0,
-          Nome: "Nulo",
-        })
+          Id: isNull ? 0 : -1,
+          Nome: isNull ? "Nulo" : "Voto em Branco",
+        }) 
       }else{
         setActualCandidate(newCadidate);
       }
@@ -100,7 +101,6 @@ export function VoteContextProvider(props: VoteContextProviderProps) {
         ChangeScreen("VoteViewer");
         return;
       }
-
       const VoterPerson = FindArrById(voters, Number(selectedNumbers));
       setCurrentVoter(VoterPerson);
       setVotingFor(0);

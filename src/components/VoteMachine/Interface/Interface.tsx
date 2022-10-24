@@ -10,14 +10,13 @@ interface DisplayProps extends HTMLAttributes<HTMLDivElement>{
 }
 export function Interface({className, ...props}: DisplayProps){
 
-  
   const { 
     status,
     selectedNumbers, 
     maxCharacters,
     nextStep,
     ChangeScreen,
-    setSelectedNumbers, 
+    setSelectedNumbers,
   } = useVoteContext();
   const audio = new Audio("./Plim.mp3");
 
@@ -25,15 +24,24 @@ export function Interface({className, ...props}: DisplayProps){
   function handleNumpadKeyPress(key: number) {
     audio.play();
     // console.log("Preview Numbers: "+selectedNumbers);
-
-    if(selectedNumbers.length >= maxCharacters || status === "Loading" || status === "Finalized")
-      return;
-    setSelectedNumbers((selectedNumbers + key).toString());
+    
+    if(
+      selectedNumbers.length >= maxCharacters && 
+      !selectedNumbers.includes("•") ||
+      ["Loading", "Finalized"].includes(status)
+    ) return;
+    
+    // if the vote is white, dont pass
+    const previousNumbers = selectedNumbers.includes("•") ? "": selectedNumbers;
+    setSelectedNumbers((previousNumbers + key).toString());
   }
 
   function handleCorrectKeyPress() {
     audio.play();
-    setSelectedNumbers(selectedNumbers.slice(0,selectedNumbers.length - 1));
+    const newNumber = selectedNumbers.includes("•") ? "" :
+    selectedNumbers.slice(0,selectedNumbers.length - 1);
+
+    setSelectedNumbers(newNumber);
   }
 
   function handleWhiteKeyPress() {
@@ -44,7 +52,8 @@ export function Interface({className, ...props}: DisplayProps){
       ChangeScreen("VoteViewer");
       setSelectedNumbers("");
     }
-    nextStep(true);
+    setSelectedNumbers("".padStart(maxCharacters,"•"));
+    // nextStep(true);
   }
 
   function handleConfirmKeyPress() {
